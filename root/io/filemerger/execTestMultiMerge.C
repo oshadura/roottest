@@ -86,8 +86,9 @@ int execTestMultiMerge()
       // but even older version (eg v5.0.0) produced smaller files ...
       result += testSimpleFile("hsimpleK202.root",6*25000,202,1938720,700);
    } else {
-      result += testSimpleFile("hsimpleK202.root",6*25000,202,2325125,16);
+      result += testSimpleFile("hsimpleK202.root",12*25000,202,4633107,16);
    }
+   result += testSimpleFile("hsimpleK409.root",6*25000,202,2325125,16);
    result += testSimpleFile("hsimpleF.root",6*25000,9,3024937,hsimpleFTolerance);
    return result;
 }
