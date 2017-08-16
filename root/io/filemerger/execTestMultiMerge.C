@@ -88,7 +88,7 @@ int execTestMultiMerge()
    } else {
       result += testSimpleFile("hsimpleK202.root",12*25000,202,4633107,16);
    }
-   result += testSimpleFile("hsimpleK409.root",6*25000,202,2325125,16);
+   result += testSimpleFile("hsimpleK409.root",5*25000,409,2404742,16);
    result += testSimpleFile("hsimpleF.root",6*25000,9,3024937,hsimpleFTolerance);
    return result;
 }

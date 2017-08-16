@@ -138,7 +138,7 @@ hsimpleK202.root: hsimple.root hsimple9.root hsimple209.root hsimple409.root hsi
 
 # LZ4-based compression (compression level 9)
 hsimpleK409.root: hsimple.root hsimple9.root hsimple209.root hsimple409.root hsimple9x2.root
-	$(CMDECHO) hadd -fk409 hsimpleK409.root hsimple409.root hsimpleK202.root hsimpleK.root hsimple9.root hsimple209.root hsimple9x2.root > hsimpleK409.log 2>&1  \
+	$(CMDECHO) hadd -fk409 hsimpleK409.root hsimple409.root hsimple9.root hsimple209.root hsimple9x2.root > hsimpleK409.log 2>&1  \
 		|| handleError.sh --log=hsimpleK409.log --res=$$?
 
 # Default compression algorithm
