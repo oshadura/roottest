@@ -11,7 +11,9 @@ RootClassVersion(RefCoreStreamer,2);
 void RefCoreStreamer::operator()(TBuffer &R__b, void *objp) {
     if (R__b.IsReading()) {
       cl_->ReadBuffer(R__b, objp);
-    } else {}
+    } else {
+      //...
+    }
 #if 1
       R__b << cl_->GetClassVersion();
 #else
@@ -22,7 +24,9 @@ void RefCoreStreamer::operator()(TBuffer &R__b, void *objp) {
 void RefCoreWithIndexStreamer::operator()(TBuffer &R__b, void *objp) {
     if (R__b.IsReading()) {
       cl_->ReadBuffer(R__b, objp);
-    } else {}
+    } else {
+      //...
+    }
 #if 1
       R__b << cl_->GetClassVersion();
 #else
@@ -44,16 +48,17 @@ void RefCoreWithIndexStreamer::operator()(TBuffer &R__b, void *objp) {
   void setRefCoreStreamer(bool resetAll) {
     {
       TClass *cl = TClass::GetClass("edm::RefCore");
-      TClassStreamer *st = cl->GetStreamer();
-      if (st == 0) {
+      if (cl->GetStreamer() == 0) {
         cl->AdoptStreamer(new RefCoreStreamer());
       }
-      {
-        TClass *cl = TClass::GetClass("edm::RefCoreWithIndex");
-        TClassStreamer *st = cl->GetStreamer();
-        if (st == 0) {
-          cl->AdoptStreamer(new RefCoreWithIndexStreamer());
-        }
+    }
+    // DOesn't work with RefCoreWithIndex..
+    /*
+    {
+      TClass *cl = TClass::GetClass("edm::RefCoreWithIndex");
+      if (cl->GetStreamer() == 0) {
+        cl->AdoptStreamer(new RefCoreStreamer());
       }
     }
+    */
   }
