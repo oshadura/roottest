@@ -303,12 +303,12 @@ int main(int argc, char **argv)
         exit(29);
       }
       int expectedSize = -1;
-      if (comp == 0) expectedSize = 5534559;
-      else if (comp == 101) expectedSize = 1254808;
-      else if (comp == 201) expectedSize = 1111230;
-      else if (comp == 301) expectedSize = 1265018;
-      else if (comp == 405) expectedSize = 1284420;
-      else if (comp == 5) expectedSize = 1208369;
+      if (comp == 0) expectedSize = 557306277;
+      else if (comp == 101) expectedSize = 124193520;
+      else if (comp == 201) expectedSize = 108980173;
+      else if (comp == 301) expectedSize = 125678510;
+      else if (comp == 405) expectedSize = 134412731;
+      else if (comp == 6) expectedSize = 113791410;
 
       if (expectedSize > 0 &&
           (tree->GetZipBytes() > expectedSize + 5000 ||
