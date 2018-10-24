@@ -49,17 +49,17 @@ ROOTTEST_ADD_TEST(LastCluster
 
 ROOT_GENERATE_DICTIONARY(TheEventDict Event.h LINKDEF EventLinkDef.h)
 ROOT_LINKER_LIBRARY(TheEvent TEST Event.cxx TheEventDict.cxx LIBRARIES ${ROOT_LIBRARIES})
-ROOTTEST_ADD_TEST(perfstattest-libevent-build 
+ROOTTEST_ADD_TEST(perfstattest-libevent-build
                   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target TheEvent${fast} -- ${always-make})
 
 set(RootExeOptions -e "gSystem->Load(\"libTheEvent\")")
-if((compression_default STREQUAL "lz4") AND (NOT builtin_zlib))
+if(compression_default STREQUAL "lz4")
       ROOTTEST_ADD_TEST(perfstattest
                   MACRO execperfstattest.C
                   OUTREF execperfstattestLZ4.oref
                   ERRREF execperfstattest.eref
                   DEPENDS perfstattest-libevent-build)
-elseif((compression_default STREQUAL "lz4") AND (builtin_zlib))
+elseif((compression_default STREQUAL "lz4") AND (CMAKE_SYSTEM_PROCESSOR MATCHES "amd64|x86_64|AMD64|X86_64|aarch64") AND (CMAKE_SYSTEM_NAME MATCHES "Linux") AND (builtin_zlib))
       ROOTTEST_ADD_TEST(perfstattest
                   MACRO execperfstattest.C
 		  OUTREF execperfstattestZLIBCF.oref

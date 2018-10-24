@@ -13,13 +13,13 @@ if(TARGET onepcm)
 endif()
 
 if(NOT TARGET eventexe)
-      ROOT_GENERATE_DICTIONARY(EventDict ${ROOT_EVENT_DIR}/Event.h 
+      ROOT_GENERATE_DICTIONARY(EventDict ${ROOT_EVENT_DIR}/Event.h
                   LINKDEF ${ROOT_EVENT_DIR}/EventLinkDef.h)
 
       ROOT_LINKER_LIBRARY(EventTreeFormula TEST ${ROOT_EVENT_DIR}/Event.cxx EventDict.cxx
                   LIBRARIES Core Tree Hist MathCore)
 
-      ROOTTEST_GENERATE_EXECUTABLE(EventGenerate ${ROOT_EVENT_DIR}/MainEvent.cxx 
+      ROOTTEST_GENERATE_EXECUTABLE(EventGenerate ${ROOT_EVENT_DIR}/MainEvent.cxx
                   LIBRARIES Core RIO Net Tree Hist MathCore EventTreeFormula)
 
       add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Event.root
@@ -107,6 +107,11 @@ if(compression_default STREQUAL "lz4")
                   COPY_TO_BUILDDIR files/output_Coulomb_LER_study_10.root
                   OUTREF references/exectrimLZ4_i686.ref)
     endif()
+elseif((compression_default STREQUAL "lz4") AND (CMAKE_SYSTEM_PROCESSOR MATCHES "amd64|x86_64|AMD64|X86_64|aarch64") AND (CMAKE_SYSTEM_NAME MATCHES "Linux") AND (builtin_zlib))
+	   ROOTTEST_ADD_TEST(exectrim
+                  MACRO exectrim.C
+                  COPY_TO_BUILDDIR files/output_Coulomb_LER_study_10.root
+		  OUTREF references/exectrimZLIBCF.ref)
 else()
             ROOTTEST_ADD_TEST(exectrim
                   MACRO exectrim.C
@@ -132,5 +137,3 @@ ROOTTEST_ADD_TEST(index
 ROOTTEST_ADD_TEST(assertBranchCount
                   MACRO assertBranchCount.C
                   OUTREF assertBranchCount.ref)
-
-
