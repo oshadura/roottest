@@ -1,7 +1,7 @@
 #include "RefCoreStreamer.h"
 
 {
-  TFile *f = File::Open("http://root.cern.ch/files/CMS/cms_aodsim_mc1713TeVDYJetsToLL.root");
+  TFile *f = TFile::Open("http://root.cern.ch/files/CMS/cms_aodsim_mc1713TeVDYJetsToLL.root");
   TTree *tree = (TTree*)f->Get("Events");
   tree->MakeClass("edm::RefCore");
   //tree->MakeClass("RefCoreWithIndex");
